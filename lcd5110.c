@@ -101,7 +101,8 @@ void init_lcd()
     send_command(0x20);    // LCD basic commands
     send_command(0x0C);
     
-    //P1OUT |= (BL);
+    // turn on backlight
+    P1OUT |= (BL);
 }
 
 
@@ -156,26 +157,10 @@ int main()
     
     // clear the display
     clear_display();
-    
-    set_cursor(0, 0);
-    print_string("1234567890-=_+");
-    
-    set_cursor(0, 1);
-    print_string("ABCDEFGHIJKLMN");
-    
+     
     set_cursor(0, 2);
-    print_string("OPQRSTUVWXYZ()");
+    print_string("luan.heliohost.org");
     
-    set_cursor(0, 3);
-    print_string("abcdefghijklmn");
-    
-    set_cursor(0, 4);
-    print_string("opqrstuvwxyz[]");
-    
-    set_cursor(0, 5);
-    print_string("!@#$%¨&*");
-    
-    P1OUT &= (0xFF & ~BL);
     P1OUT |= CE;
     while (1)
     {
