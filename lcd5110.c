@@ -48,23 +48,22 @@ void send_byte(unsigned char byte)
     unsigned char i;
     for (i = 0; i < 8; i++)
     {
-        P1OUT &= (0xFF & ~CLK);
+        P1OUT &= (~CLK);
         if (byte > 127) {
             P1OUT |= DIN;
         }
         else
         {
-            P1OUT &= (0xFF & ~DIN);
+            P1OUT &= (~DIN);
         }
         
-        delay_us(1);
         // rise clock
         P1OUT |= (CLK);
         
         // shift byte
         byte = byte << 1;
     }
-    P1OUT &= (0xFF & ~CLK);
+    P1OUT &= (~CLK);
 }
 
 
@@ -77,7 +76,7 @@ void send_data(unsigned char data)
 
 void send_command(unsigned char cmd)
 {
-    P1OUT &= (0xFF & ~DC);
+    P1OUT &= (~DC);
     send_byte(cmd);
 }
 
@@ -90,19 +89,19 @@ void init_lcd()
     delay_ms(50);
     
     // reset the controller
-    P1OUT &= (0xFF & ~RST);
+    P1OUT &= (~RST);
     delay_us(1);
     P1OUT |= (RST);
     
     // start
-    P1OUT &= (0xFF & ~CE);
+    P1OUT &= (~CE);
     send_command(0x21);
     send_command(0x99);    // set LCD Vop (contrast)
     send_command(0x20);    // LCD basic commands
     send_command(0x0C);
     
     // turn on backlight
-    P1OUT |= (BL);
+    //P1OUT |= (BL);
 }
 
 
@@ -157,9 +156,11 @@ int main()
     
     // clear the display
     clear_display();
-     
-    set_cursor(0, 2);
-    print_string("luan.heliohost.org");
+
+    set_cursor(12, 2);
+    print_string("Olá Mundo");
+    set_cursor(12, 3);
+    print_string("Ola Mundo!");
     
     P1OUT |= CE;
     while (1)
