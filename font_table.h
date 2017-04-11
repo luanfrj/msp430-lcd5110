@@ -8,10 +8,6 @@
 #ifndef FONT_TABLE_H
 #define	FONT_TABLE_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
 static const char font[][5] = { // basic font
  {0x00, 0x00, 0x00, 0x00, 0x00} // 20
 ,{0x00, 0x00, 0x5f, 0x00, 0x00} // 21 !
@@ -177,10 +173,6 @@ static const char font_rus[][5] = {
 { 0x7C, 0x10, 0x38, 0x44, 0x38 },  // fe ю
 { 0x48, 0x54, 0x34, 0x14, 0x7C }   // ff я
 };
-
-#ifdef	__cplusplus
-}
-#endif
 
 #endif	/* FONT_TABLE_H */
 

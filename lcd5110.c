@@ -157,14 +157,19 @@ int main()
     // clear the display
     clear_display();
 
-    set_cursor(12, 2);
-    print_string("Olá Mundo");
+    set_cursor(0, 0);
+    print_string("Ola Mundo");
     set_cursor(12, 3);
-    print_string("Ola Mundo!");
+    print_string("OLA MUNDO!");
     
-    P1OUT |= CE;
+    P1OUT &= (~BL);
+    
     while (1)
     {
+        delay_ms(1000);
+        send_command(0x0D);
         
+        delay_ms(1000);
+        send_command(0x0C);
     }
 }
